@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<!--
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────────▇▇▇▇▇▇▇▇▇
+▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇──────▇▇▇▇▇──────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇────▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇────▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇─────▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─▇▇─▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇─────▇▇▇▇▇▇──▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──────▇▇▇▇───▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇───▇▇▇▇──▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇────▇▇▇──▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇───▇▇───▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇───▇▇──▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇──────▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇─────▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇─▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇▇────▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇▇───▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇
+▇▇▇▇▇───▇▇▇▇▇──▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────────▇▇▇▇▇▇▇▇
+▇▇▇▇──────▇▇▇─▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇─────▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇──▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇────▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─▇▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇──────▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇──▇▇─▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇─────▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────▇▇▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+-->  
+<html>  
+    <head> 
+<!-- Clarity tracking code for https://musestar-silasila.github.io/ --><script>    (function(c,l,a,r,i,t,y){        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);    })(window, document, "clarity", "script", "bq49okey7z");</script> 
+        <meta charset="UTF-8">  
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/hdhead.js"></script>
+        <title>缪斯星影视-斯啦斯啦o(*≧▽≦)ツ看片看剧～</title> 
+<meta name="keywords" content="电影,在线观看,电视剧,剧集,漫威,缪斯星,MUSESTAR,晓天,XOTA">
+	      <link href="https://musestar-silasila.github.io/animation/files/style.css" rel="stylesheet" type="text/css">
+	        <link rel="shortcut icon" href="https://musestar-silasila.github.io/ms.ico">
+<script type="text/javascript" src="https://musestar-silasila.github.io/animation/files/history.js"></script>
+</head>
+
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/gg.js"></script>
+
+      <body><style> body{cursor:url('https://musestar-silasila.github.io/files/sbzz.png'),auto;}</style><style> body{cursor:url('https://musestar-silasila.github.io/files/sbzz.png'),auto;}</style><script src="https://musestar-silasila.github.io/files/sbtx.js"></script>
+    <script type="text/javascript" src="https://musestar-silasila.github.io/files/moviehead.js"></script>
+    <script type="text/javascript" src="https://musestar-silasila.github.io/files/time.js"></script>  
+    <script type="text/javascript" src="https://musestar-silasila.github.io/files/weather.js"></script>
+    <script type="text/javascript" src="https://musestar-silasila.github.io/files/search.js"></script>
+    <div class="area">
+      <div class="firs l">
+        <div class="dtit">
+          <h2>
+            <a href="https://musestar-silasila.github.io/">电影</a></h2>
+        </div>
+        <div class="img">
+            <li>
+                <a href="https://musestar-silasila.github.io/film/Avatar2.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/Avatar2.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/film/Avatar2.html">阿凡达2：水之道</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/Avatar2.html">2022-12-16</a></p>
+                <p>影片时长:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/Avatar2.html">x:xx:xx</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/film/CyberHell.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/CyberHell.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/film/CyberHell.html">网络炼狱：揭发N号房</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/CyberHell.html">2022-05-18</a></p>
+                <p>影片时长:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/CyberHell.html">1:45:31</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/film/DoctorStrange2.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/DoctorStrange2.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/film/DoctorStrange2.html">奇异博士2：疯狂多元</a></p>
+                    <p class="tname">
+                        <a href="https://musestar-silasila.github.io/film/DoctorStrange2.html">宇宙</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/DoctorStrange2.html">2022-05-06</a></p>
+                <p>影片时长:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/DoctorStrange2.html">2:06:29</a></p>
+            </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/FantasticBeasts3.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/FantasticBeasts3.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/FantasticBeasts3.html">神奇动物3：邓布利多</a></p>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/FantasticBeasts3.html">之谜</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/FantasticBeasts3.html">2022-04-08</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/FantasticBeasts3.html">2:22:32</a></p>
+        </li>
+    </div>
+    <div class="img">
+        <li>
+            <a href="https://musestar-silasila.github.io/film/Morbius.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/Morbius.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/Morbius.html">暗夜博士：莫比亚斯</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Morbius.html">2022-04-01</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Morbius.html">1:43:25</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/EverythingEverywhereAllatOnce.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/EverythingEverywhereAllatOnce.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/EverythingEverywhereAllatOnce.html">瞬息全宇宙</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/EverythingEverywhereAllatOnce.html">2022-03-25</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/EverythingEverywhereAllatOnce.html">2:19:17</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/moonfall.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/moonfall.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/moonfall.html">月球陨落</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/moonfall.html">2022-03-25</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/moonfall.html">2:10:14</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/TheBatman.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/TheBatman.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/TheBatman.html">新蝙蝠侠</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TheBatman.html">2022-03-18</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TheBatman.html">2:56:10</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/TheAdamProject.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/TheAdamProject.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/TheAdamProject.html">亚当计划</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TheAdamProject.html">2022-03-11</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TheAdamProject.html">1:46:16</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/NiceView.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/NiceView.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/NiceView.html">奇迹·笨小孩</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/NiceView.html">2022-02-01</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/NiceView.html">1:45:44</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/TooCoolToKill.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/TooCoolToKill.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/TooCoolToKill.html">这个杀手不太冷静</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TooCoolToKill.html">2022-02-01</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TooCoolToKill.html">1:49:08</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/NoWayHome.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/NoWayHome.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/NoWayHome.html">蜘蛛侠3：英雄无归</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/NoWayHome.html">2021-12-15</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/NoWayHome.html">2:28:09</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/Dune.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/Dune.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/Dune.html">沙丘</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Dune.html">2021-10-22</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Dune.html">2:28:24</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/BlackBox.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/BlackBox.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/BlackBox.html">黑匣子</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/BlackBox.html">2021-09-08</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/BlackBox.html">2:09:05</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/Avatar.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/Avatar.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/Avatar.html">阿凡达</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Avatar.html">2009-12-18</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Avatar.html">2:57:37</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/TheShawshankRedemption.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/TheShawshankRedemption.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/TheShawshankRedemption.html">肖申克的救赎</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TheShawshankRedemption.html">1994-09-23</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/TheShawshankRedemption.html">2:22:15</a></p>
+        </li>
+</div>
+    <div class="area">
+      <div class="firs l">
+        <div class="dtit">
+          <h2>
+            <a href="https://musestar-silasila.github.io/">剧集</a></h2>
+        </div>
+        <div class="img">
+            <li>
+                <a href="https://musestar-silasila.github.io/teleplay/MsMarvel.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/teleplay/files/MsMarvel.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/teleplay/MsMarvel.html">惊奇少女</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/teleplay/MsMarvel.html">2022-06-08</a></p>
+                <p>更新中:
+                    <a target="_blank" href="https://musestar-silasila.github.io/teleplay/MsMarvel.html">共4集</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/teleplay/moonknight.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/teleplay/files/moonknight.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/teleplay/moonknight.html">月光骑士</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/teleplay/moonknight.html">2022-03-30</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/teleplay/moonknight.html">共6集</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/teleplay/3body.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/teleplay/files/3body.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/teleplay/3body.html">三体</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/teleplay/3body.html">2022-xx-xx</a></p>
+                <p>未上映:
+                    <a target="_blank" href="https://musestar-silasila.github.io/teleplay/3body.html">共24集</a></p>
+            </li>
+</div> 
+</div></div></div>
+    <div class="side r">
+    <div class="firs l">
+    <div class="dtit">
+        <h2>公告</h2>
+    </div>
+    </div>
+	<div class="tlist">
+        <li>
+            <span>
+                <a>7-5</a></span>
+            <a>详情页面更新（仅限6.27后上映的剧集）</a>
+        </li>
+        <li>
+            <span>
+                <a>7-5</a></span>
+            <a>播放页面更新（仅限7.2后上映的电影和剧集）</a>
+        </li>
+        <li>
+            <span>
+                <a>7-2</a></span>
+            <a>上映《三体》预告片</a>
+        </li>
+        <li>
+            <span>
+                <a>6-27</a></span>
+            <a>上映《惊奇少女》</a>
+        </li>
+        <li>
+            <span>
+                <a>6-27</a></span>
+            <a>上映《阿凡达2：水之道》预告片</a>
+        </li>
+        <li>
+            <span>
+                <a>6-27</a></span>
+            <a>上映《阿凡达》</a>
+        </li>
+        <li>
+            <span>
+                <a>6-26</a></span>
+            <a>上映《新蝙蝠侠》</a>
+        </li>
+        <li>
+            <span>
+                <a>6-25</a></span>
+            <a>上映《奇异博士2：疯狂多元宇宙》</a>
+        </li>
+        <li>
+            <span>
+                <a>6-03</a></span>
+            <a>上映《肖申克的救赎》</a>
+        </li>
+        <li>
+            <span>
+                <a>5-28</a></span>
+            <a>上映《瞬息全宇宙》</a>
+        </li>
+        <li>
+            <span>
+                <a>5-28</a></span>
+            <a>上映《网络炼狱：揭发N号房》</a>
+        </li>
+        <li>
+            <span>
+                <a>5-28</a></span>
+            <a>上映《黑匣子》</a>
+        </li>
+	    <li>
+                <span>
+                    <a>5-21</a></span>
+                <a>上映《沙丘》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>5-20</a></span>
+                <a>上映《暗夜博士：莫比亚斯》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>5-15</a></span>
+                <a>上映《神奇动物3：邓布利多之谜》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>4-23</a></span>
+                <a>上映《奇迹·笨小孩》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>4-23</a></span>
+                <a>上映《这个杀手不太冷静》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>4-23</a></span>
+                <a>上映《亚当计划》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>4-23</a></span>
+                <a>上映《蜘蛛侠3：英雄无归》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>4-18</a></span>
+                <a>上映《月光骑士》</a>
+            </li>
+	    <li>
+                <span>
+                    <a>4-15</a></span>
+                <a>上映《月球陨落》</a>
+            </li>
+</div>
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/fdzz.js"></script>
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/hd.js"></script>
+<div class="blank5"></div>
+</div>       
+      </div>
+ <div class="blank"></div>
+      </div>
+         </div>
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/under.js"></script>
+</body>
+</html>

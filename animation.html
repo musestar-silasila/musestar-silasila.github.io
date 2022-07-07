@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<!--
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────────▇▇▇▇▇▇▇▇▇
+▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇──────▇▇▇▇▇──────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇────▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇────▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇─────▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─▇▇─▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇─────▇▇▇▇▇▇──▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──────▇▇▇▇───▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇───▇▇▇▇──▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇────▇▇▇──▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇───▇▇───▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇───▇▇──▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇──────▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇─────▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇─▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇▇────▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇──▇▇▇▇───▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇
+▇▇▇▇▇───▇▇▇▇▇──▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────────▇▇▇▇▇▇▇▇
+▇▇▇▇──────▇▇▇─▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇─────▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇──▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇────▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─▇▇▇▇▇▇──▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────────▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇──────▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇──▇▇─▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇────▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇─────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇▇▇─────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────▇▇▇▇▇▇─────▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇────────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇──────▇▇▇▇▇▇───────▇▇▇▇▇▇▇▇▇▇▇▇────────▇▇▇▇────▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇───▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+-->  
+<html>  
+    <head>  
+<!-- Clarity tracking code for https://musestar-silasila.github.io/ --><script>    (function(c,l,a,r,i,t,y){        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);    })(window, document, "clarity", "script", "bq49okey7z");</script>
+        <meta charset="UTF-8">  
+<style> 
+ body {
+   background:url("https://iw233.cn/api.php?sort=pc")  no-repeat center center;   /*加载背景图*/   /* 背景图不平铺 */
+   background-size:cover;  /* 让背景图基于容器大小伸缩 */
+   background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
+   background-color:#CCCCCC;   /* 设置背景颜色，背景图加载过程中会显示背景色 */
+ }
+</style>
+        <title>缪斯星动漫-斯啦斯啦o(*≧▽≦)ツ好番来咯～</title> 
+        <link rel="shortcut icon" href="https://musestar-silasila.github.io/ms.ico">
+<meta name='description' content='缪斯星动漫正在持续收集动漫番剧及电影，给您免费播放网站中的最好体验！'>
+<meta name='keywords' content='番剧,动漫,在线观看,缪斯星,MUSESTAR,晓天,XOTA'>
+<div id='wx_pic' style='margin:0 auto;display:none;'>
+    <img src='./files/thumbnail.jpg'>
+  </div>
+	      <link href="https://musestar-silasila.github.io/animation/files/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="https://musestar-silasila.github.io/animation/files/history.js"></script>
+</head>
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/gg.js"></script>
+    <body><style> body{cursor:url('https://musestar-silasila.github.io/files/sbzz.png'),auto;}</style><script src="https://musestar-silasila.github.io/files/sbtx.js"></script>
+	  <script src="https://musestar-silasila.github.io/files/sakura.js"></script>
+    <script type="text/javascript" src="./files/animationhead.js"></script>
+    <script type="text/javascript" src="https://musestar-silasila.github.io/files/search.js"></script>
+    <br>
+    <div class="area">
+      <div class="firs l">
+        <div class="dtit">
+          <h2>
+            <a href="https://musestar-silasila.github.io/">7月新番</a></h2>
+        </div>
+        <div class="img">
+            <iframe src="//player.bilibili.com/player.html?aid=898074461&bvid=BV1RN4y1g7zd&cid=762864319&page=1&high_quality=1" width='450' height="250" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/EngageKiss.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/EngageKiss.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/EngageKiss.html">契约之吻</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/EngageKiss.html">2022-07-04</a></p>
+            <p>更新中:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/EngageKiss.html">共1集</a></p>
+        </li>
+    </div>
+    <div class="img">
+        <iframe src="//player.bilibili.com/player.html?aid=214843125&bvid=BV1ea411L72j&cid=741060678&page=1&high_quality=1" width='450' height="250" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+    <li>
+        <a href="https://musestar-silasila.github.io/animation/tlro.html">
+            <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/tlro.jpg"></a>
+        <p class="tname">
+            <a href="https://musestar-silasila.github.io/animation/tlro.html">天籁人偶</a></p>
+        <p>上映时间:
+            <a target="_blank" href="https://musestar-silasila.github.io/animation/tlro.html">2022-07-04</a></p>
+        <p>更新中:
+            <a target="_blank" href="https://musestar-silasila.github.io/animation/tlro.html">共1集</a></p>
+    </li>
+</div>
+        <div class="img">
+            <iframe src="//player.bilibili.com/player.html?aid=600168157&bvid=BV1sB4y1s7Ev&cid=753630128&page=1&high_quality=1" width='450' height="250" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/jmdtypswdqny.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/jmdtypswdqny.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/jmdtypswdqny.html">继母的拖油瓶是我的</a></p>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/jmdtypswdqny.html">前女友</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/jmdtypswdqny.html">2022-07-06</a></p>
+            <p>更新中:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/jmdtypswdqny.html">共1集</a></p>
+        </li>
+        <div class="img">
+            <iframe src="//player.bilibili.com/player.html?aid=469874284&bvid=BV1uT41157MA&cid=742146866&page=1&high_quality=1" width='450' height="250" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/ysjjj.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/ysjjj.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/ysjjj.html">异世界舅舅</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/ysjjj.html">2022-07-06</a></p>
+            <p>更新中:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/ysjjj.html">共1集</a></p>
+        </li>
+    </div>
+    </div>
+        <div class="img">
+            <iframe src="//player.bilibili.com/player.html?aid=893316406&bvid=BV1tP4y177UX&cid=487651698&page=1&high_quality=1" width='450' height="250" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/jszy.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/jszy.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/jszy.html">就算这样，“步”还是</a></p>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/jszy.html">靠了过来</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/jszy.html">2022-07-07</a></p>
+            <p>未上映:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/jszy.html">共0集</a></p>
+        </li>
+    </div>
+    <div class="area">
+      <div class="firs l">
+        <div class="dtit">
+          <h2>
+            <a href="https://musestar-silasila.github.io/">番剧</a></h2>
+        </div>
+        <a href="https://musestar-silasila.github.io/animation/spyfamily.html"><img src="https://musestar-silasila.github.io/animation/files/spyfamily.gif"></a>
+        <a href="https://musestar-silasila.github.io/animation/bg.html"><img src="https://musestar-silasila.github.io/animation/files/bg.gif"></a>
+        <a href="https://musestar-silasila.github.io/animation/ydmy.html"><img src="https://musestar-silasila.github.io/animation/files/ydmy.gif"></a>
+     </div>
+        <div class="img">
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/spyfamily.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/spyfamily.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/spyfamily.html">间谍过家家</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/spyfamily.html">2022-04-09</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/spyfamily.html">共12集</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/mnzl.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/mnzl.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/mnzl.html">魔女之旅</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/mnzl.html">2020-10-02</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/mnzl.html">共12集</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/Charlotte.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Charlotte.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/Charlotte.html">Charlotte</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/Charlotte.html">2015-07-04</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/Charlotte.html">共13集</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/ydmy.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/ydmy.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/ydmy.html">青春猪头少年不会梦到</a></p>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/ydmy.html">兔女郎学姐</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/ydmy.html">2018-10-04</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/ydmy.html">共13集</a></p>
+            </li>
+        </div>
+        <div class="img">
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/bg.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/bg.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/bg.html">冰菓</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/bg.html">2012-04-22</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/bg.html">共22集</a></p>
+            </li>
+                        <li>
+                <a href="https://musestar-silasila.github.io/animation/pdlk.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/pdlk.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/pdlk.html">派对浪客诸葛孔明</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/pdlk.html">2022-04-05</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/pdlk.html">共12集</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/tcwzdczgjzxs.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/tcwzdczgjzxs.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/tcwzdczgjzxs.html">天才王子的赤字国家</a></p>
+          <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/tcwzdczgjzxs.html">振兴术</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/tcwzdczgjzxs.html">2022-01-11</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/tcwzdczgjzxs.html">共12集</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/gjtxyjlzaz.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/gjtxyjlzaz.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/gjtxyjlzaz.html">古见同学有交流</a></p>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/gjtxyjlzaz.html">障碍症</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/gjtxyjlzaz.html">2021-10-06</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/gjtxyjlzaz.html">共12集</a></p>
+            </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/gjtxyjlzaz2.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/gjtxyjlzaz2.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/gjtxyjlzaz2.html">古见同学有交流</a></p>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/gjtxyjlzaz2.html">障碍症第二季</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/gjtxyjlzaz2.html">2022-04-06</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/gjtxyjlzaz2.html">共12集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/sssyyhnp.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/sssyyhnp.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/sssyyhnp.html">死神少爷与黑女仆</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/sssyyhnp.html">2021-07-04</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/sssyyhnp.html">共12集</a></p>
+        </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/animation/almals.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/almals.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/animation/almals.html">埃罗芒阿老师</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/almals.html">2017-04-09</a></p>
+                <p>已完结:
+                    <a target="_blank" href="https://musestar-silasila.github.io/animation/almals.html">共12集</a></p>
+            </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/VioletEvergarden.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/VioletEvergarden.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/VioletEvergarden.html">紫罗兰永恒花园</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/VioletEvergarden.html">2018-01-10</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/VioletEvergarden.html">共14集</a></p>
+        </li>
+    </div>
+    <div class="img">
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/Gabriel.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Gabriel.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/Gabriel.html">珈百璃的堕落</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Gabriel.html">2017-01-09</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Gabriel.html">共12集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/gyrozrah.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/gyrozrah.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/gyrozrah.html">更衣人偶坠入爱河</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/gyrozrah.html">2022-01-08</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/gyrozrah.html">共12集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/xrcx.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/xrcx.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/xrcx.html">夏日重现</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/xrcx.html">2022-04-14</a></p>
+            <p>更新中:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/xrcx.html">共12集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/biliRailgun.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Railgun.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/biliRailgun.html">某科学的超电磁炮</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/biliRailgun.html">2009-10-02</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/biliRailgun.html">共24集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/biliRailgun2.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Railgun2.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/biliRailgun2.html">某科学的超电磁炮S</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/biliRailgun2.html">2013-04-12</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/biliRailgun2.html">共24集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/Railgun3.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Railgun3.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/Railgun3.html">某科学的超电磁炮T</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Railgun3.html">2020-01-11</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Railgun3.html">共25集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/Accelerator.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Accelerator.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/Accelerator.html">某科学的一方通行</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Accelerator.html">2019-07-13</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Accelerator.html">共24集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/Index.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Index.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/Index.html">魔法禁书目录</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Index.html">2008-10-04</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Index.html">共24集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/Index2.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Index2.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/Index2.html">魔法禁书目录第二季</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Index2.html">2010-10-08</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Index2.html">共24集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/Index3.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/Index3.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/Index3.html">魔法禁书目录第三季</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Index3.html">2018-10-05</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/Index3.html">共26集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/thtdm.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/thtdm.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/thtdm.html">她和她的猫</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/thtdm.html">2016-03-04</a></p>
+            <p>已完结:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/thtdm.html">共4集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/hmbb.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/hmbb.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/hmbb.html">海绵宝宝</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/hmbb.html">1999-07-17</a></p>
+            <p>更新中:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/hmbb.html">共161集</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/3body.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/3body.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/3body.html">三体</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/3body.html">202x-xx-xx</a></p>
+            <p>未上映:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/3body.html">共0集</a></p>
+        </li>
+</div>
+    <div class="area">
+      <div class="firs l">
+        <div class="dtit">
+          <h2>
+            <a href="https://musestar-silasila.github.io/">番剧电影</a></h2>
+        </div>
+        <div class="img">
+            <li>
+                <a href="https://musestar-silasila.github.io/film/lyhd.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/lyhd.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/film/lyhd.html">铃芽户缔</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/lyhd.html">2022-11-11</a></p>
+                <p>影片时长:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/lyhd.html">x:xx:xx</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/film/twxtdsd.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/twxtdsd.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/film/twxtdsd.html">通往夏天的隧道，</a></p>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/film/twxtdsd.html">再见的出口</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/twxtdsd.html">2022-09-09</a></p>
+                <p>影片时长:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/twxtdsd.html">x:xx:xx</a></p>
+            </li>
+            <li>
+                <a href="https://musestar-silasila.github.io/film/wdfdxnjcb.html">
+                    <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/wdfdxnjcb.jpg"></a>
+                <p class="tname">
+                    <a href="https://musestar-silasila.github.io/film/wdfdxnjcb.html">五等分的新娘剧场版</a></p>
+                <p>上映时间:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/wdfdxnjcb.html">2022-05-20</a></p>
+                <p>影片时长:
+                    <a target="_blank" href="https://musestar-silasila.github.io/film/wdfdxnjcb.html">x:xx:xx</a></p>
+            </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/HelloWorld.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/HelloWorld.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/HelloWorld.html">你好世界</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/HelloWorld.html">2021-06-11</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/HelloWorld.html">1:37:43</a></p>
+        </li>
+    </div>
+    <div class="img">
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/VioletEvergardenjcb.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/VioletEvergardenjcb.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/VioletEvergardenjcb.html">紫罗兰永恒花园剧场版</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/VioletEvergardenjcb.html">2020-09-18</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/VioletEvergardenjcb.html">2:20:06</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/WeatheringWithYou.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/WeatheringWithYou.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/WeatheringWithYou.html">天气之子</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/WeatheringWithYou.html">2019-11-01</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/WeatheringWithYou.html">1:52:10</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/animation/VioletEvergardenwz.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/animation/files/VioletEvergardenwz.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/animation/VioletEvergardenwz.html">永远与自动手记人偶</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/VioletEvergardenwz.html">2019-09-06</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/animation/VioletEvergardenwz.html">1:30:39</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/ydmyjcb.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/ydmyjcb.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/ydmyjcb.html">青春猪头少年不会梦到</a></p>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/ydmyjcb.html">怀梦美少女</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/ydmyjcb.html">2019-06-15</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/ydmyjcb.html">1:29:54</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/YourName.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/YourName.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/YourName.html">你的名字</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/YourName.html">2016-12-02</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/YourName.html">1:46:40</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/yyzt.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/yyzt.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/yyzt.html">言叶之庭</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/yyzt.html">2013-05-31</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/yyzt.html">46:04</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/Indexjcb.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/Indexjcb.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/Indexjcb.html">魔法禁书目录剧场版</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Indexjcb.html">2013-02-23</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/Indexjcb.html">1:30:06</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/5cm.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/5cm.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/5cm.html">秒速5厘米</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/5cm.html">2007-03-03</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/5cm.html">1:02:44</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/yzbd.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/yzbd.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/yzbd.html">云之彼端，约定的地方</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/yzbd.html">2004-11-20</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/yzbd.html">1:30:21</a></p>
+        </li>
+        <li>
+            <a href="https://musestar-silasila.github.io/film/xzs.html">
+                <img referrerpolicy="no-referrer" src="https://musestar-silasila.github.io/film/files/xzs.jpg"></a>
+            <p class="tname">
+                <a href="https://musestar-silasila.github.io/film/xzs.html">星之声</a></p>
+            <p>上映时间:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/xzs.html">2002-02-02</a></p>
+            <p>影片时长:
+                <a target="_blank" href="https://musestar-silasila.github.io/film/xzs.html">24:26</a></p>
+        </li>
+</div>
+</div></div></div></div>
+    <div class="side r">
+    <div class="firs l">
+    <div class="dtit">
+        <h2>公告</h2>
+    </div>
+    </div>
+	<div class="tlist">
+        <li>
+            <span>
+                <a>缪斯星</a></span>
+            <a>《契约之吻》每周一更新</a>
+        </li>
+        <li>
+            <span>
+                <a>缪斯星</a></span>
+            <a>《就算这样，“步”还是靠了过来》每周五更新</a>
+        </li>
+        <li>
+            <span>
+                <a>缪斯星</a></span>
+            <a>《天籁人偶》每周一更新</a>
+        </li>
+        <li>
+            <span>
+                <a>缪斯星</a></span>
+            <a>《继母的拖油瓶是我的前女友》每周三更新</a>
+        </li>
+        <li>
+            <span>
+                <a>缪斯星</a></span>
+            <a>《异世界舅舅》每周四更新</a>
+        </li>
+        <li>
+            <span>
+                <a>缪斯星</a></span>
+            <a>《夏日重现》每周五更新</a>
+        </li>
+        <li>
+            <span>
+                <a>7-7</a></span>
+            <a>上映《异世界舅舅》</a>
+        </li>
+        <li>
+            <span>
+                <a>7-6</a></span>
+            <a>上映《继母的拖油瓶是我的前女友》</a>
+        </li>
+        <li>
+            <span>
+                <a>7-6</a></span>
+            <a>上映《天籁人偶》</a>
+        </li>
+        <li>
+            <span>
+                <a>7-5</a></span>
+            <a>详情页面更新（仅限7.3后上映的番剧）</a>
+        </li>
+        <li>
+            <span>
+                <a>7-5</a></span>
+            <a>上映《契约之吻》</a>
+        </li>
+        <li>
+            <span>
+                <a>7-4</a></span>
+            <a>上映《冰菓》</a>
+        </li>
+        <li>
+            <span>
+                <a>7-3</a></span>
+            <a>弹幕功能更新（仅限7.3后上映的番剧）</a>
+        </li>
+        <li>
+            <span>
+                <a>7-3</a></span>
+            <a>播放页面更新（仅限7.3后上映的番剧）</a>
+        </li>
+        <li>
+            <span>
+                <a>7-2</a></span>
+            <a>上映《青春猪头少年不会梦到兔女郎学姐》</a>
+        </li>
+        <li>
+            <span>
+                <a>6-26</a></span>
+            <a>上映《夏日重现》</a>
+        </li>
+        <li>
+            <span>
+                <a>6-26</a></span>
+            <a>上映《埃罗芒阿老师》</a>
+        </li>
+        <li>
+            <span>
+                <a>6-26</a></span>
+            <a>上映《海绵宝宝》</a>
+        </li>
+            <li>
+                <span>
+                    <a>6-12</a></span>
+                <a>上映《派对浪客诸葛孔明》</a>
+            </li>
+            <li>
+                <span>
+                    <a>6-11</a></span>
+                <a>上映《三体》预告片</a>
+            </li>
+            <li>
+                <span>
+                    <a>6-8</a></span>
+                <a>上映《通往夏天的隧道，再见的出口》预告片</a>
+            </li>
+            <li>
+                <span>
+                    <a>6-8</a></span>
+                <a>上映《五等分的新娘剧场版》预告片</a>
+            </li>
+            <li>
+                <span>
+                    <a>6-4</a></span>
+                <a>上映《Charlotte》</a>
+            </li>
+            <li>
+                <span>
+                    <a>6-4</a></span>
+                <a>上映《青春猪头少年不会梦到怀梦美少女》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-29</a></span>
+                <a>上映《珈百璃的堕落》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-29</a></span>
+                <a>上映《魔法禁书目录剧场版》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-29</a></span>
+                <a>上映《魔法禁书目录第二季》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-29</a></span>
+                <a>上映《魔法禁书目录》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-28</a></span>
+                <a>上映《某科学的超电磁炮T》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-28</a></span>
+                <a>上映《某科学的超电磁炮S》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-28</a></span>
+                <a>上映《某科学的超电磁炮》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-22</a></span>
+                <a>上映《她和她的猫》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-22</a></span>
+                <a>上映《云之彼端，约定的地方》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-22</a></span>
+                <a>上映《星之声》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-22</a></span>
+                <a>上映《秒速5厘米》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-22</a></span>
+                <a>上映《言叶之庭》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-14</a></span>
+                <a>上映《古见同学有交流障碍症第二季》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-14</a></span>
+                <a>上映《古见同学有交流障碍症》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-1</a></span>
+                <a>上映《你好世界》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-1</a></span>
+                <a>上映《天气之子》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-1</a></span>
+                <a>上映《你的名字》</a>
+            </li>
+            <li>
+                <span>
+                    <a>5-1</a></span>
+                <a>上映《铃芽户缔》预告片</a>
+            </li>
+            <li>
+                <span>
+                    <a>4-23</a></span>
+                <a>上映《天才王子的赤字国家振兴术》</a>
+            </li>
+            <li>
+                <span>
+                    <a>4-17</a></span>
+                <a>上映《魔女之旅》</a>
+            </li>
+            <li>
+                <span>
+                    <a>4-17</a></span>
+                <a>上映《紫罗兰永恒花园剧场版》</a>
+            </li>
+            <li>
+                <span>
+                    <a>4-17</a></span>
+                <a>上映《永远与自动手记人偶》</a>
+            </li>
+            <li>
+                <span>
+                    <a>4-17</a></span>
+                <a>上映《紫罗兰永恒花园》</a>
+            </li>
+		<li>
+                <span>
+                    <a>4-16</a></span>
+                <a>上映《更衣人偶坠入爱河》</a>
+            </li>
+		<li>
+                <span>
+                    <a>4-15</a></span>
+                <a>上映《间谍过家家》</a>
+            </li>
+</div>
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/fdzz.js"></script>
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/hd.js"></script>
+<div class="blank5"></div>
+</div>       
+      </div>
+ <div class="blank"></div>
+      </div>
+         </div>
+<script type="text/javascript" src="https://musestar-silasila.github.io/files/under.js"></script>
+
+</body>
+</html>
