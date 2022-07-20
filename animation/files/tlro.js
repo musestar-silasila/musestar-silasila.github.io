@@ -1,1 +1,1 @@
-document.write("第一季更新中：共2集");
+document.write("第一季更新中：共3集");
