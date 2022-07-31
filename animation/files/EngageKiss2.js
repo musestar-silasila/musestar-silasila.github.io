@@ -2,3 +2,4 @@ document.write("<li><a href=\"https:\/\/musestar-silasila.github.io\/animation\/
 document.write("<li><a href=\"https:\/\/musestar-silasila.github.io\/animation\/EngageKiss\/02.html\">第2集<\/a><\/li>");
 document.write("<li><a href=\"https:\/\/musestar-silasila.github.io\/animation\/EngageKiss\/03.html\">第3集<\/a><\/li>");
 document.write("<li><a href=\"https:\/\/musestar-silasila.github.io\/animation\/EngageKiss\/04.html\">第4集<\/a><\/li>");
+document.write("<li><a href=\"https:\/\/musestar-silasila.github.io\/animation\/EngageKiss\/05.html\">第5集<\/a><\/li>");
